@@ -24,7 +24,7 @@ func (catlog *Catlog) FindId() Catlog {
 	return result
 }
 
-func (catlog *Catlog) Insert() {
+func (catlog *Catlog) Insert() bson.ObjectId{
 
 	if catlog.Id == "" {
 		catlog.Id = bson.NewObjectId()
@@ -36,6 +36,8 @@ func (catlog *Catlog) Insert() {
 		fmt.Println(2)
 		log.Fatal(err)
 	}
+
+	return catlog.Id
 }
 
 func (catlog *Catlog) FindOne(query interface{}) Catlog {

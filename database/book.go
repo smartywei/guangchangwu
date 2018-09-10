@@ -21,7 +21,7 @@ func (book *Book) FindId() Book {
 	return result
 }
 
-func (book *Book) Insert() {
+func (book *Book) Insert() bson.ObjectId {
 
 	if book.Id == "" {
 		book.Id = bson.NewObjectId()
@@ -32,6 +32,8 @@ func (book *Book) Insert() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	return book.Id
 }
 
 func (book *Book) FindOne(query interface{}) Book {

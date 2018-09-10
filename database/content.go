@@ -8,7 +8,9 @@ import (
 
 type Content struct {
 	Id   bson.ObjectId `json:"id" bson:"_id"`
+	Order int `json:"order"`
 	Cat_log_id bson.ObjectId `json:"cat_log_id"`
+	Book_id bson.ObjectId `json:"book_id"`
 	Content string        `json:"content"`
 }
 
@@ -23,7 +25,7 @@ func (content *Content) FindId() Content {
 	return result
 }
 
-func (content *Content) Insert() {
+func (content *Content) Insert() bson.ObjectId {
 
 	if content.Id == "" {
 		content.Id = bson.NewObjectId()
@@ -35,6 +37,8 @@ func (content *Content) Insert() {
 		fmt.Println(3)
 		log.Fatal(err)
 	}
+
+	return content.Id
 }
 
 func (content *Content) FindOne(query interface{}) Content {
