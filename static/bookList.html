@@ -18,16 +18,32 @@
 
 <div class="page-group">
     <div id="page-inset-list" class="page page-current">
+
         <header class="bar bar-nav">
             <h1 class="title">书籍列表</h1>
         </header>
+
+
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                    <form action="/search">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" name="search" id="search" placeholder="输入关键字...">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <div class="content native-scroll">
             <div class="list-block media-list inset">
                 <ul>
 
                 {{range .}}
                     <li>
-                        <a href="/catlist?book_id={{.Id}}" class="item-link item-content">
+                        <a href="/catlist?book_id={{.Id}}" data-no-cache="true" class="item-link item-content">
                             <div class="item-inner">
                                 <div class="item-title-row">
                                     <div class="item-title">{{.Name}}</div>
@@ -38,9 +54,15 @@
                     </li>
                 {{end}}
 
+                {{if le (len .) 0}}
+                    暂时没有数据
+                {{end}}
+
+
                 </ul>
             </div>
         </div>
+
     </div>
 
 </div>

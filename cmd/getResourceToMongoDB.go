@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	bookList := getResource.GetSearch("天道图书馆")
+	bookList := getResource.GetSearch("极品家丁")
 
 	if len(bookList) <= 0 {
 		panic("没有搜索内容")

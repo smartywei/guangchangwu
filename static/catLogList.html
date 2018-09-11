@@ -19,7 +19,7 @@
 <div class="page-group">
     <div id="page-inset-list" class="page page-current">
         <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left back" href="/demos/list">
+            <a class="button button-link button-nav pull-left back" href="/">
                 <span class="icon icon-left"></span>
                 返回
             </a>
@@ -31,7 +31,7 @@
 
                     {{range .CatLogList}}
                         <li>
-                            <a href="/content?cat_id={{.Id}}" class="item-link item-content">
+                            <a href="/content?cat_id={{.Id}}" data-no-cache="true" class="item-link item-content">
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">{{.Name}}</div>

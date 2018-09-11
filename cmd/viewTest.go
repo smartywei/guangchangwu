@@ -28,9 +28,18 @@ type catLogInfo struct {
 type Content struct {
 	Cat_log_name template.HTML `json:"cat_log_name"`
 	Content      template.HTML `json:"content"`
+	Book_id string `json:"book_id"`
+	Order int `json:"order"`
 }
 
 func bookList(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+
+	if r.URL.Path != "/" {
+		fmt.Fprintln(w, "404 page not fout")
+		return
+	}
 
 	book := database.Book{}
 
@@ -106,16 +115,47 @@ func content(w http.ResponseWriter, r *http.Request) {
 		content_res := Content{
 			template.HTML(content_info.Cat_log_name),
 			template.HTML(content_info.Content),
+			content_info.Book_id.Hex(),
+			content_info.Order,
 		}
 
 		t.Execute(w, content_res)
 	}
 }
 
+func Search(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	search := r.Form["search"]
+	if len(search) <= 0 || len(search[0]) <= 0 {
+		fmt.Fprint(w, "404 page not fout")
+		return
+	}
+
+	book := database.Book{}
+
+	bookList := book.FindAll(bson.M{"name": bson.M{"$regex": search[0], "$options": "$i"}})
+
+	list := []BookList{}
+
+	for _, v := range bookList {
+
+		list = append(list, BookList{
+			v.Id.Hex(),
+			v.Name,
+		})
+	}
+
+	t, _ := template.ParseFiles("static/bookList.html")
+
+	t.Execute(w, list)
+
+}
+
 func main() {
 	http.HandleFunc("/", bookList)       // 设置访问的路由
 	http.HandleFunc("/catlist", catList) // 设置访问的路由
 	http.HandleFunc("/content", content) // 设置访问的路由
+	http.HandleFunc("/search", Search)   // 设置访问的路由
 
 	err := http.ListenAndServe(":80", nil) // 设置监听的端口
 	if err != nil {
