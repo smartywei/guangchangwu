@@ -1,17 +1,18 @@
 package database
 
 import (
-"gopkg.in/mgo.v2/bson"
-"log"
+	"gopkg.in/mgo.v2/bson"
+	"log"
 	"fmt"
 )
 
 type Content struct {
-	Id   bson.ObjectId `json:"id" bson:"_id"`
-	Order int `json:"order"`
-	Cat_log_id bson.ObjectId `json:"cat_log_id"`
-	Book_id bson.ObjectId `json:"book_id"`
-	Content string        `json:"content"`
+	Id           bson.ObjectId `json:"id" bson:"_id"`
+	Order        int           `json:"order"`
+	Cat_log_id   bson.ObjectId `json:"cat_log_id"`
+	Cat_log_name string        `json:"cat_log_name"`
+	Book_id      bson.ObjectId `json:"book_id"`
+	Content      string        `json:"content"`
 }
 
 var content_collent = "contents"

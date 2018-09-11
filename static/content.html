@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>章节目录</title>
+    <title>文章内容</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,35 +15,28 @@
 </head>
 <body>
 
-
 <div class="page-group">
-    <div id="page-inset-list" class="page page-current">
+    <div id="page-nav-bar-labels" class="page">
         <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left back" href="/demos/list">
+            <a class="button button-link button-nav pull-left back" href="/demos/bar">
                 <span class="icon icon-left"></span>
                 返回
             </a>
-            <h1 class="title">{{.BookInfo.Name}}</h1>
+            <h1 class="title">{{.Cat_log_name}}</h1>
         </header>
-        <div class="content native-scroll">
-            <div class="list-block media-list inset">
-                <ul>
-
-                    {{range .CatLogList}}
-                        <li>
-                            <a href="/content?cat_id={{.Id}}" class="item-link item-content">
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">{{.Name}}</div>
-                                    </div>
-                                    <div class="item-subtitle">&nbsp</div>
-                                </div>
-                            </a>
-                        </li>
-                    {{end}}
-
-                </ul>
-            </div>
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="#">
+                上一页
+            </a>
+            <a class="tab-item external" href="#">
+               目录
+            </a>
+            <a class="tab-item external" href="#">
+                下一页
+            </a>
+        </nav>
+        <div class="content">
+            {{.Content}}
         </div>
     </div>
 

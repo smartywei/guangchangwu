@@ -1,7 +1,7 @@
 package getResource
 
 import (
-	"book/request"
+	"my_book/request"
 	"github.com/PuerkitoBio/goquery"
 	"strings"
 	"golang.org/x/text/transform"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>章节目录</title>
+    <title>书籍目录</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,28 +19,24 @@
 <div class="page-group">
     <div id="page-inset-list" class="page page-current">
         <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left back" href="/demos/list">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <h1 class="title">{{.BookInfo.Name}}</h1>
+            <h1 class="title">书籍列表</h1>
         </header>
         <div class="content native-scroll">
             <div class="list-block media-list inset">
                 <ul>
 
-                    {{range .CatLogList}}
-                        <li>
-                            <a href="/content?cat_id={{.Id}}" class="item-link item-content">
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">{{.Name}}</div>
-                                    </div>
-                                    <div class="item-subtitle">&nbsp</div>
+                {{range .}}
+                    <li>
+                        <a href="/catlist?book_id={{.Id}}" class="item-link item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{.Name}}</div>
                                 </div>
-                            </a>
-                        </li>
-                    {{end}}
+                                <div class="item-subtitle">&nbsp</div>
+                            </div>
+                        </a>
+                    </li>
+                {{end}}
 
                 </ul>
             </div>

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"book/getResource"
+	"my_book/getResource"
 	"gopkg.in/mgo.v2/bson"
-	"book/database"
+	"my_book/database"
 	"fmt"
 	"time"
 )
@@ -57,10 +57,11 @@ func saveResourceToMongoDB(book_id bson.ObjectId, catlog getResource.Catlog, con
 	//2.插入内容表
 
 	dbContent := database.Content{
-		Order:      catlog.Order,
-		Cat_log_id: cat_id,
-		Book_id:book_id,
-		Content: content.Content,
+		Order:        catlog.Order,
+		Cat_log_id:   cat_id,
+		Cat_log_name: catlog.Name,
+		Book_id:      book_id,
+		Content:      content.Content,
 	}
 
 	content_id := dbContent.Insert()
