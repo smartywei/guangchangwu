@@ -12,7 +12,7 @@ func getMongoSession() *mgo.Session {
 
 	if Session == nil {
 
-		sess, err := mgo.Dial("mongodb://root:123456@127.0.0.1:27017")
+		sess, err := mgo.Dial("mongodb://smartywei:123456@118.24.43.196:27017")
 
 		Session = sess
 
