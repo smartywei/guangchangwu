@@ -13,6 +13,8 @@ type content struct {
 	Content      template.HTML `json:"content"`
 	Book_id      string        `json:"book_id"`
 	Order        int           `json:"order"`
+	PreHref      string        `json:"pre_href"`
+	NextHref     string        `json:"next_href"`
 }
 
 func ViewContentList(w http.ResponseWriter, r *http.Request) {
@@ -30,6 +32,22 @@ func ViewContentList(w http.ResponseWriter, r *http.Request) {
 
 	dbContentInfo := dbContent.FindOne(bson.M{"cat_log_id": bson.ObjectIdHex(cat_id[0])})
 
+
+	var preHref string
+	var nextHref string
+
+	if dbContentInfo.Order > 0 {
+		dbPreContentInfo := dbContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContent.Order-1})
+		preHref = "/content?cat_id="+dbPreContentInfo.Cat_log_id.Hex()
+	}else{
+		preHref = "#"
+	}
+
+
+	dbNextContentInfo := dbContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContent.Order+1})
+
+	nextHref = "/content?cat_id="+dbNextContentInfo.Cat_log_id.Hex()
+
 	t, _ := template.ParseFiles("static/content.html")
 
 	content_res := content{
@@ -37,6 +55,8 @@ func ViewContentList(w http.ResponseWriter, r *http.Request) {
 		template.HTML(dbContentInfo.Content),
 		dbContentInfo.Book_id.Hex(),
 		dbContentInfo.Order,
+		preHref,
+		nextHref,
 	}
 
 	t.Execute(w, content_res)

@@ -6,6 +6,7 @@ import (
 	"strings"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/encoding/simplifiedchinese"
+	"regexp"
 )
 
 type Book struct {
@@ -123,8 +124,12 @@ func GetContents(href string) Content {
 
 	content, _ := dom.Find("#htmlContent").Html()
 
+	r, _ := regexp.Compile("\n                        武林中文网 WWW.50ZW.LA，最快更新(.*?)最新章节！<br/><br/>")
+
+	s := r.FindString(content)
+
 	return Content{
-		content,
+		strings.Replace(content, s, "", 1),
 	}
 
 }

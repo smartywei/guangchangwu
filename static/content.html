@@ -18,20 +18,16 @@
 <div class="page-group">
     <div id="page-nav-bar-labels" class="page">
         <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left" href="/catlist?book_id={{.Book_id}}#order{{.Order}}">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
             <h1 class="title">{{.Cat_log_name}}</h1>
         </header>
         <nav class="bar bar-tab">
-            <a class="tab-item external active" href="#">
+            <a class="tab-item external active" href="{{.PreHref}}">
                 上一页
             </a>
-            <a class="tab-item external active" href="#">
+            <a class="tab-item external active" href="/catlist?book_id={{.Book_id}}">
                目录
             </a>
-            <a class="tab-item external active" href="#">
+            <a class="tab-item external active" href="{{.NextHref}}">
                 下一页
             </a>
         </nav>

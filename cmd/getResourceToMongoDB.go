@@ -36,7 +36,7 @@ func main() {
 			Content: getResource.GetContents(v.Href).Content,
 		})
 
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Second * 3)
 	}
 
 	database.Close()
@@ -52,9 +52,7 @@ func saveResourceToMongoDB(book_id bson.ObjectId, catlog getResource.Catlog, con
 
 	cat_id := dbCatLog.Insert()
 
-	fmt.Println("目录插入成功： ID ------》", cat_id)
-
-	//2.插入内容表
+	fmt.Println("目录插入成功： ID ------》", cat_id ,"OrderId-------》",catlog.Order)
 
 	dbContent := database.Content{
 		Order:        catlog.Order,
@@ -66,5 +64,5 @@ func saveResourceToMongoDB(book_id bson.ObjectId, catlog getResource.Catlog, con
 
 	content_id := dbContent.Insert()
 
-	fmt.Println("内容插入成功： ID ------》", content_id)
+	fmt.Println("内容插入成功： ID ------》", content_id,"OrderId-------》",catlog.Order)
 }
