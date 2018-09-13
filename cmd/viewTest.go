@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"log"
 	"my_book/controllers"
+	"fmt"
 )
 
 func main() {
@@ -16,4 +17,6 @@ func main() {
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
+
+	fmt.Println("服务器开启成功！")
 }
