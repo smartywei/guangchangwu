@@ -29,24 +29,29 @@ func ViewContentList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dbContent := database.Content{}
+	dbPreContent := database.Content{}
+	dbNextContent := database.Content{}
 
 	dbContentInfo := dbContent.FindOne(bson.M{"cat_log_id": bson.ObjectIdHex(cat_id[0])})
-
 
 	var preHref string
 	var nextHref string
 
 	if dbContentInfo.Order > 0 {
-		dbPreContentInfo := dbContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContent.Order-1})
+		dbPreContentInfo := dbPreContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContentInfo.Order-1})
 		preHref = "/content?cat_id="+dbPreContentInfo.Cat_log_id.Hex()
 	}else{
 		preHref = "#"
 	}
 
 
-	dbNextContentInfo := dbContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContent.Order+1})
+	dbNextContentInfo := dbNextContent.FindOne(bson.M{"book_id": dbContentInfo.Book_id,"order":dbContentInfo.Order+1})
 
-	nextHref = "/content?cat_id="+dbNextContentInfo.Cat_log_id.Hex()
+	if dbNextContentInfo.Order > 0 {
+		nextHref = "/content?cat_id="+dbNextContentInfo.Cat_log_id.Hex()
+	}else{
+		nextHref = "#"
+	}
 
 	t, _ := template.ParseFiles("static/content.html")
 
