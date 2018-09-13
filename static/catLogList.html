@@ -11,27 +11,29 @@
 
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-
 </head>
 <body>
 
 
 <div class="page-group">
-    <div id="page-inset-list" class="page page-current">
+
+    <div id="page-inset-list" style="display: block" class="page page-current">
+
         <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left back" href="/">
+            <a class="button button-link button-nav pull-left external" data-no-cache="true" href="/">
                 <span class="icon icon-left"></span>
                 返回
             </a>
             <h1 class="title">{{.BookInfo.Name}}</h1>
         </header>
+
         <div class="content native-scroll">
             <div class="list-block media-list inset">
                 <ul>
 
                     {{range .CatLogList}}
-                        <li>
-                            <a href="/content?cat_id={{.Id}}" data-no-cache="true" class="item-link item-content">
+                        <li id="order{{.Order}}">
+                            <a href="/content?cat_id={{.Id}}" data-no-cache="true" class="item-link item-content external">
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">{{.Name}}</div>
@@ -45,6 +47,7 @@
                 </ul>
             </div>
         </div>
+
     </div>
 
 </div>
@@ -52,6 +55,10 @@
 <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-
 </body>
+
+<script>
+    location.hash = "/order22";
+</script>
+
 </html>
