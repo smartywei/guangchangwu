@@ -28,17 +28,16 @@ func main() {
 
 	time.Sleep(time.Second * 3)
 
-	//catlogList := getResource.GetCatlogs(book.Href)
-	getResource.GetCatlogs(book.Href)
+	catlogList := getResource.GetCatlogs(book.Href)
 
-	//for _, v := range catlogList {
-	//
-	//	saveResourceToMongoDB(book_id, v, getResource.Content{
-	//		Content: getResource.GetContents(v.Href).Content,
-	//	})
-	//
-	//	time.Sleep(time.Second * 3)
-	//}
+	for _, v := range catlogList {
+
+		saveResourceToMongoDB(book_id, v, getResource.Content{
+			Content: getResource.GetContents(v.Href).Content,
+		})
+
+		time.Sleep(time.Second * 3)
+	}
 
 	database.Close()
 }
