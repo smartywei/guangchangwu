@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-var mBaseHref = "http://m.50zw.la"
+var mBaseHref = "http://m.50zww.com"
 
-var mCatLogHref = "http://m.50zw.la/chapters_"
+var mCatLogHref = "http://m.50zww.com/chapters_"
 
 type Book struct {
 	Name string
@@ -78,7 +78,7 @@ func GetCatlogs(href string) []Catlog {
 
 	request := &bookrequest.Request{
 		href,
-		nil,
+		map[string]string{"text":"html","User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36"},
 		nil,
 	}
 
@@ -116,23 +116,26 @@ func GetCatlogs(href string) []Catlog {
 
 		dom.Find(".last9 li a").Each(func(index int, selection *goquery.Selection) {
 
-			if index == 0{
-				return
-			}
-
 			title := strings.TrimSpace(selection.Text())
 			link, _ := selection.Attr("href")
 			link = strings.TrimSpace(link)
 
+			if index == 0{
+				fmt.Println("跳过标题：",title)
+				return
+			}
+
 			r, _ := regexp.Compile("第(.*?)章(.*?)")
 
 			if !r.MatchString(title) {
+				fmt.Println("跳过不必要：",title)
 				return
 			}
 
 			r2, _ := regexp.Compile("第([\\d]+)章(.*?)")
 
 			if r2.MatchString(title) {
+				fmt.Println("跳过数字章节：",title)
 				return
 			}
 
@@ -141,6 +144,7 @@ func GetCatlogs(href string) []Catlog {
 			tagString := r3.FindString(title)
 
 			if catTitleKyeList[tagString] != 0 {
+				fmt.Println("跳过重复：",title,"-------title:",tagString,"-----val:",catLogList[catTitleKyeList[tagString]])
 				return
 			}
 
