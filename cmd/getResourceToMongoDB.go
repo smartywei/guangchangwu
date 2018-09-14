@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Println("书籍插入成功： ID ------》", book_id)
 
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * 3)
 
 	catlogList := getResource.GetCatlogs(book.Href)
 

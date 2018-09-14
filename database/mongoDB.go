@@ -2,6 +2,8 @@ package database
 
 import (
 	"gopkg.in/mgo.v2"
+	"fmt"
+	"time"
 )
 
 var Session *mgo.Session
@@ -17,7 +19,9 @@ func getMongoSession() *mgo.Session {
 		Session = sess
 
 		if err != nil {
-			panic(err)
+			fmt.Println("数据库连接失败，正在重新尝试连接数据库...")
+			time.Sleep(time.Second * 10)
+			return getMongoSession()
 		}
 
 		Session.SetMode(mgo.Monotonic, true)

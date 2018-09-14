@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"book/queue"
+	"my_book/queue"
 )
 
 func main()  {
