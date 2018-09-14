@@ -17,6 +17,19 @@
 
 <div class="page-group">
     <div id="page-nav-bar-labels" class="page">
+
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="{{.PreHref}}">
+                上一页
+            </a>
+            <a class="tab-item external active" href="/catlist?book_id={{.Book_id}}">
+               目录
+            </a>
+            <a class="tab-item external active" href="{{.NextHref}}">
+                下一页
+            </a>
+        </nav>
+
         <div class="content">
 
             <div class="bar bar-nav">
@@ -26,20 +39,6 @@
             <br>
 
             {{.Content}}
-
-            <br>
-
-            <div class="bar bar-tab">
-                <a class="tab-item external active" href="{{.PreHref}}">
-                    上一页
-                </a>
-                <a class="tab-item external active" href="/catlist?book_id={{.Book_id}}">
-                    目录
-                </a>
-                <a class="tab-item external active" href="{{.NextHref}}">
-                    下一页
-                </a>
-            </div>
 
         </div>
     </div>

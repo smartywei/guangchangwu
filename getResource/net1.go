@@ -250,7 +250,7 @@ func GetContents(href string) Content {
 	}
 
 	content = strings.Replace(content, "&amp;", "&", -1)
-	content = strings.Replace(content, "\n;", "", -1)
+	content = strings.Replace(content, "\n", "", -1)
 	content = strings.TrimSpace(content)
 
 	//r, _ := regexp.Compile("\n                        武林中文网 WWW.50ZW.LA，最快更新(.*?)最新章节！<br/><br/>")
