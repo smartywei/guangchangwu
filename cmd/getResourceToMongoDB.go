@@ -30,6 +30,8 @@ func main() {
 
 	catlogList := getResource.GetCatlogs(book.Href)
 
+	fmt.Println(catlogList)
+
 	for _, v := range catlogList {
 
 		saveResourceToMongoDB(book_id, v, getResource.Content{
