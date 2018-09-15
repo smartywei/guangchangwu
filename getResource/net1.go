@@ -157,7 +157,7 @@ func GetCatlogs(href string) []Catlog {
 				nowContent := string([]byte(GetContents(mBaseHref + link).Content)[:50])
 
 				if (oldContent == nowContent) {
-					fmt.Println("跳过重复：", title, "-------title:", tagString, "-----val:", catLogList[catTitleKyeList[tagString]])
+					fmt.Println("跳过重复：", title, "-------title:", tagString, "-----val:", catLogList[catTitleKyeList[tagString]-1])
 					return
 				}
 
